@@ -20,7 +20,7 @@ async function comparePasswords(supplied, stored) {
   return timingSafeEqual(hashedBuf, suppliedBuf);
 }
 
-function setupAuth(app) {
+export function setupAuth(app) {
   const sessionSettings = {
     secret: process.env.SESSION_SECRET || "cisf-medical-system-secret",
     resave: false,
@@ -102,8 +102,4 @@ function setupAuth(app) {
   });
 }
 
-export {
-  setupAuth,
-  hashPassword,
-  comparePasswords
-};
+export { hashPassword, comparePasswords };

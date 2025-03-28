@@ -60,18 +60,18 @@ export default function Sidebar({ onOpenSettings }: SidebarProps) {
       <nav className="flex-1 pt-4 px-2">
         <div className="space-y-1">
           {navItems.map((item) => (
-            <Link key={item.path} href={item.path}>
-              <a
-                className={cn(
-                  "flex items-center space-x-3 px-3 py-2 text-sm font-medium rounded-md transition-colors",
-                  location === item.path
-                    ? "bg-secondary text-secondary-foreground"
-                    : "text-muted-foreground hover:bg-secondary hover:text-secondary-foreground"
-                )}
-              >
-                {item.icon}
-                <span>{item.label}</span>
-              </a>
+            <Link 
+              key={item.path} 
+              href={item.path}
+              className={cn(
+                "flex items-center space-x-3 px-3 py-2 text-sm font-medium rounded-md transition-colors",
+                location === item.path
+                  ? "bg-secondary text-secondary-foreground"
+                  : "text-muted-foreground hover:bg-secondary hover:text-secondary-foreground"
+              )}
+            >
+              {item.icon}
+              <span>{item.label}</span>
             </Link>
           ))}
         </div>

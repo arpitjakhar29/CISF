@@ -115,18 +115,19 @@ export default function MobileMenu({ onOpenSettings }: MobileMenuProps) {
               <div className="p-4">
                 <nav className="space-y-2">
                   {navItems.map((item) => (
-                    <Link key={item.path} href={item.path} onClick={closeMenu}>
-                      <a
-                        className={cn(
-                          "flex items-center space-x-3 px-3 py-2 text-sm font-medium rounded-md",
-                          location === item.path
-                            ? "bg-secondary text-secondary-foreground"
-                            : "text-muted-foreground hover:bg-secondary hover:text-secondary-foreground"
-                        )}
-                      >
-                        {item.icon}
-                        <span>{item.label}</span>
-                      </a>
+                    <Link 
+                      key={item.path} 
+                      href={item.path} 
+                      onClick={closeMenu}
+                      className={cn(
+                        "flex items-center space-x-3 px-3 py-2 text-sm font-medium rounded-md",
+                        location === item.path
+                          ? "bg-secondary text-secondary-foreground"
+                          : "text-muted-foreground hover:bg-secondary hover:text-secondary-foreground"
+                      )}
+                    >
+                      {item.icon}
+                      <span>{item.label}</span>
                     </Link>
                   ))}
                 </nav>

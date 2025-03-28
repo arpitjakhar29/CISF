@@ -81,29 +81,23 @@ export default function HomePage() {
           </motion.div>
           
           <motion.div variants={item} className="mt-12 flex justify-center space-x-6">
-            <Link href="/">
-              <a className={cn(
-                "text-muted-foreground hover:text-foreground transition-colors",
-                "underline-offset-4 hover:underline"
-              )}>
-                HOME
-              </a>
+            <Link href="/" className={cn(
+              "text-muted-foreground hover:text-foreground transition-colors",
+              "underline-offset-4 hover:underline"
+            )}>
+              HOME
             </Link>
-            <Link href="/about">
-              <a className={cn(
-                "text-muted-foreground hover:text-foreground transition-colors",
-                "underline-offset-4 hover:underline"
-              )}>
-                ABOUT
-              </a>
+            <Link href="/about" className={cn(
+              "text-muted-foreground hover:text-foreground transition-colors",
+              "underline-offset-4 hover:underline"
+            )}>
+              ABOUT
             </Link>
-            <Link href={user ? "/claims" : "/auth"}>
-              <a className={cn(
-                "text-muted-foreground hover:text-foreground transition-colors",
-                "underline-offset-4 hover:underline"
-              )}>
-                MY CLAIMS
-              </a>
+            <Link href={user ? "/claims" : "/auth"} className={cn(
+              "text-muted-foreground hover:text-foreground transition-colors",
+              "underline-offset-4 hover:underline"
+            )}>
+              MY CLAIMS
             </Link>
           </motion.div>
         </motion.div>

@@ -120,7 +120,7 @@ export async function registerRoutes(app) {
         ...req.body,
         userId: req.user.id,
         status: "pending",
-        submissionDate: new Date().toISOString()
+        submissionDate: new Date()
       };
       
       const newClaim = await storage.createClaim(claimData);
@@ -267,5 +267,3 @@ export async function registerRoutes(app) {
   const httpServer = createServer(app);
   return httpServer;
 }
-
-// Module exports removed - using ES modules export above

@@ -1,13 +1,16 @@
 import express from "express";
 import fs from "fs";
-import path from "path";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 import { createServer as createViteServer, createLogger } from "vite";
-import { nanoid } from "nanoid";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 import viteConfig from "../vite.config.js";
+import { nanoid } from "nanoid";
 
 const viteLogger = createLogger();
 
-function log(message, source = "express") {
+export function log(message, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "2-digit",
@@ -18,7 +21,7 @@ function log(message, source = "express") {
   console.log(`${formattedTime} [${source}] ${message}`);
 }
 
-async function setupVite(app, server) {
+export async function setupVite(app, server) {
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
@@ -66,7 +69,7 @@ async function setupVite(app, server) {
   });
 }
 
-function serveStatic(app) {
+export function serveStatic(app) {
   const distPath = path.resolve(__dirname, "public");
 
   if (!fs.existsSync(distPath)) {
@@ -82,9 +85,3 @@ function serveStatic(app) {
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }
-
-export {
-  log,
-  setupVite,
-  serveStatic
-};
