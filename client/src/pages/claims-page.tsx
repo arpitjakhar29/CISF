@@ -204,13 +204,7 @@ function renderClaimsTable(claims: any[], isLoading: boolean, getStatusBadge: (s
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
   };
   
-  // Function to display doctor name with Rupee symbol
-  const formatDoctorName = (doctorName: string) => {
-    if (!doctorName) return "N/A";
-    // If it already has a Rupee symbol at the beginning, just display it
-    // Otherwise, it's a display-only formatting and we shouldn't add the symbol
-    return doctorName;
-  };
+
   
   return (
     <div className="overflow-x-auto">
@@ -264,7 +258,7 @@ function renderClaimsTable(claims: any[], isLoading: boolean, getStatusBadge: (s
                 {claim.hospitalName || "N/A"}
               </td>
               <td className="px-4 py-3 whitespace-nowrap text-sm">
-                {formatDoctorName(claim.doctorName)}
+                {claim.doctorName || "N/A"}
               </td>
               <td className="px-4 py-3 whitespace-nowrap text-sm">
                 ₹{claim.amount.toLocaleString()}
