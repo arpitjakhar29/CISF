@@ -364,7 +364,20 @@ export default function FormPage() {
                                   <FormItem>
                                     <FormLabel>Doctor's Name</FormLabel>
                                     <FormControl>
-                                      <Input placeholder="Doctor's name" {...field} />
+                                      <div className="relative">
+                                        <span className="absolute left-3 top-1/2 transform -translate-y-1/2">₹</span>
+                                        <Input 
+                                          placeholder="Doctor's name" 
+                                          className="pl-7" 
+                                          {...field} 
+                                          value={field.value ? field.value.replace(/^₹/, '') : ''}
+                                          onChange={(e) => {
+                                            // Remove any existing Rupee symbols to prevent duplication
+                                            const value = e.target.value.replace(/^₹/, '');
+                                            field.onChange(value);
+                                          }}
+                                        />
+                                      </div>
                                     </FormControl>
                                     <FormMessage />
                                   </FormItem>

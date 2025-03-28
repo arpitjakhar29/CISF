@@ -204,6 +204,14 @@ function renderClaimsTable(claims: any[], isLoading: boolean, getStatusBadge: (s
     return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
   };
   
+  // Function to display doctor name with Rupee symbol
+  const formatDoctorName = (doctorName: string) => {
+    if (!doctorName) return "N/A";
+    // If it already has a Rupee symbol at the beginning, just display it
+    // Otherwise, it's a display-only formatting and we shouldn't add the symbol
+    return doctorName;
+  };
+  
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full divide-y divide-border">
@@ -217,6 +225,12 @@ function renderClaimsTable(claims: any[], isLoading: boolean, getStatusBadge: (s
             </th>
             <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
               Category
+            </th>
+            <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+              Hospital/Pharmacy
+            </th>
+            <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
+              Doctor
             </th>
             <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
               Amount
@@ -245,6 +259,12 @@ function renderClaimsTable(claims: any[], isLoading: boolean, getStatusBadge: (s
               </td>
               <td className="px-4 py-3 whitespace-nowrap text-sm capitalize">
                 {claim.category}
+              </td>
+              <td className="px-4 py-3 whitespace-nowrap text-sm">
+                {claim.hospitalName || "N/A"}
+              </td>
+              <td className="px-4 py-3 whitespace-nowrap text-sm">
+                {formatDoctorName(claim.doctorName)}
               </td>
               <td className="px-4 py-3 whitespace-nowrap text-sm">
                 ₹{claim.amount.toLocaleString()}

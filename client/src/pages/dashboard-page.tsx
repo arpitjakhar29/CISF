@@ -101,7 +101,7 @@ export default function DashboardPage() {
                   
                   <StatsCard
                     title="Next Appointment"
-                    value={dashboardData?.nextAppointment?.doctorName || "No Appointments"}
+                    value={dashboardData?.nextAppointment?.doctorName ? `₹${dashboardData.nextAppointment.doctorName}` : "No Appointments"}
                     subtitle={dashboardData?.nextAppointment?.specialization || ""}
                     icon={<Calendar />}
                     iconBgClass="bg-blue-900/30"

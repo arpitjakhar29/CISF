@@ -116,8 +116,15 @@ export async function registerRoutes(app) {
         return res.status(401).json({ message: "Unauthorized" });
       }
       
+      // Add Rupee symbol to doctor's name if it doesn't already have one
+      let doctorName = req.body.doctorName;
+      if (doctorName && !doctorName.startsWith('₹')) {
+        doctorName = `₹${doctorName}`;
+      }
+      
       const claimData = {
         ...req.body,
+        doctorName,
         userId: req.user.id,
         status: "pending",
         submissionDate: new Date()

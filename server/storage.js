@@ -1,5 +1,6 @@
 import session from "express-session";
 import createMemoryStore from "memorystore";
+import { MongoStorage, mongoStorage } from './mongoStorage.js';
 
 const MemoryStore = createMemoryStore(session);
 
@@ -357,5 +358,32 @@ class MemStorage {
   }
 }
 
-export const storage = new MemStorage();
-export { MemStorage };
+// Initialize MongoDB storage
+async function initStorage() {
+  try {
+    // Try to initialize MongoDB storage
+    const initialized = await mongoStorage.initialize();
+    if (initialized) {
+      console.log('Using MongoDB storage');
+      return mongoStorage;
+    }
+  } catch (err) {
+    console.error('Error initializing MongoDB storage:', err);
+  }
+  
+  // Fallback to in-memory storage
+  console.log('Using in-memory storage');
+  return new MemStorage();
+}
+
+// Default to in-memory storage until MongoDB is initialized
+let storage = new MemStorage();
+
+// Immediately try to initialize MongoDB
+initStorage().then(result => {
+  storage = result;
+}).catch(err => {
+  console.error('Failed to initialize storage:', err);
+});
+
+export { storage, MemStorage };
