@@ -1,0 +1,187 @@
+## Project Overview
+
+Create a comprehensive CISF Medical System using the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows CISF officers to manage their medical entitlements, submit claims, and track their medical benefits. The system should have a modern, responsive UI with animations and transitions, robust backend APIs, secure authentication, and comprehensive data management.
+
+## Frontend Requirements (React.js)
+
+### UI/UX Design
+
+- Implement a modern, responsive design with a dark mode option
+- Create a vibrant UI with animations and transitions using Framer Motion
+- Design should match the provided screenshots with a clean, professional aesthetic
+- Implement shadcn/ui components for consistent styling
+- Use Tailwind CSS for responsive layouts and styling
+
+
+### Pages and Components
+
+1. **Home Page**
+
+1. Hero section with "Medical management system for CISF Officers" heading
+2. "Claim your Medical Privileges and Entitlements here" subheading
+3. "Let's get Started" button that directs to the dashboard
+4. Navigation menu with HOME, ABOUT, and MY CLAIMS options
+5. Settings gear icon that opens a settings menu
+
+
+
+2. **Settings Menu**
+
+1. Modal overlay with options: Dashboard, Entitlements, Help and support, Settings, Close
+2. Each option should navigate to the respective page
+
+
+
+3. **Dashboard Page**
+
+1. Statistical cards showing Available Balance, Pending Claims, Next Appointment
+2. Interactive bar chart showing claims by category (Domiciliary, Chronic, Hospitalization)
+3. Claim Summary section with progress bars for each entitlement category
+4. Recent Activity section showing latest transactions and status updates
+
+
+
+4. **About Page**
+
+1. Gradient background with information about the CISF Medical System
+2. Detailed explanation of the system's purpose and benefits
+
+
+
+5. **Claims Page**
+
+1. Tabbed interface to view All Claims, Pending, Approved, and Rejected
+2. Data table showing claim details with filtering options
+3. Option to submit new claims
+
+
+
+6. **Form Page**
+
+1. Tabbed form with Personal Details and Bill Details sections
+2. Form validation for all required fields
+3. Submit functionality with loading state and success/error feedback
+
+
+
+7. **Entitlements Page**
+
+1. Visual representation of entitlement balances with progress bars
+2. Detailed breakdown of Domiciliary, Chronic, and Hospitalization categories
+3. Information about entitlement policies
+
+
+
+8. **Help and Support Page**
+
+1. FAQ section with accordion for common questions
+2. User guide with step-by-step instructions
+3. Contact form for support requests
+
+
+
+
+
+### State Management
+
+- Use React Context API for global state management
+- Implement Redux Toolkit for complex state management needs
+- Create custom hooks for reusable logic
+
+
+### Authentication
+
+- Implement JWT-based authentication with refresh tokens
+- Create login/signup pages with form validation
+- Add protected routes for authenticated users only
+- Store tokens securely in HTTP-only cookies
+
+
+## Backend Requirements (Node.js/Express)
+
+### API Structure
+
+1. **Authentication API**
+
+1. POST /api/auth/register - Register new user
+2. POST /api/auth/login - User login
+3. POST /api/auth/refresh - Refresh access token
+4. POST /api/auth/logout - User logout
+
+
+
+2. **User API**
+
+1. GET /api/users/profile - Get user profile
+2. PUT /api/users/profile - Update user profile
+3. GET /api/users/:id - Get specific user (admin only)
+4. PUT /api/users/:id - Update specific user (admin only)
+
+
+
+3. **Officer API**
+
+1. POST /api/officers - Add new officer
+2. GET /api/officers - Get all officers (with pagination)
+3. GET /api/officers/:id - Get specific officer
+4. PUT /api/officers/:id - Update officer details
+5. DELETE /api/officers/:id - Delete officer (admin only)
+
+
+
+4. **Claims API**
+
+1. POST /api/claims - Submit new claim
+2. GET /api/claims - Get all claims (with filtering)
+3. GET /api/claims/:id - Get specific claim
+4. PUT /api/claims/:id - Update claim status
+5. DELETE /api/claims/:id - Delete claim (admin only)
+
+
+
+5. **Entitlements API**
+
+1. GET /api/entitlements - Get all entitlement categories
+2. GET /api/entitlements/:id - Get specific entitlement
+3. PUT /api/entitlements/:id - Update entitlement balance
+
+
+
+
+
+### Middleware
+
+- Authentication middleware to verify JWT tokens
+- Role-based authorization middleware
+- Request validation middleware using Joi or express-validator
+- Error handling middleware
+- CORS configuration
+- Rate limiting for security
+
+
+### Security
+
+- Implement helmet for securing HTTP headers
+- Use bcrypt for password hashing
+- Set up CSRF protection
+- Implement input sanitization
+- Add request rate limiting
+- Configure proper CORS settings
+
+
+## Database Requirements (MongoDB)
+
+### Data Models
+
+1. **User Schema**
+
+
+```javascript
+{
+  username: String,
+  email: String,
+  password: String,
+  role: String, // admin, officer, medical-officer
+  profile: {
+    name: String,
+    contactNumber: String...
