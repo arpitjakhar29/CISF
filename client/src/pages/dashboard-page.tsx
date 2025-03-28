@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/use-auth";
-import { Search, Bell, Calendar, DollarSign, Clock } from "lucide-react";
+import { Search, Bell, Calendar, DollarSign, Clock, HeartPulse, TrendingUp } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -12,6 +12,8 @@ import StatsCard from "@/components/dashboard/stats-card";
 import ChartCard from "@/components/dashboard/chart-card";
 import ClaimSummary from "@/components/dashboard/claim-summary";
 import RecentActivity from "@/components/dashboard/recent-activity";
+import TrendAnalysisChart from "@/components/dashboard/trend-analysis-chart";
+import HealthMetricsCard from "@/components/dashboard/health-metrics-card";
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -101,7 +103,7 @@ export default function DashboardPage() {
                   
                   <StatsCard
                     title="Next Appointment"
-                    value={dashboardData?.nextAppointment?.doctorName ? `₹${dashboardData.nextAppointment.doctorName}` : "No Appointments"}
+                    value={dashboardData?.nextAppointment?.doctorName ? `${dashboardData.nextAppointment.doctorName}` : "No Appointments"}
                     subtitle={dashboardData?.nextAppointment?.specialization || ""}
                     icon={<Calendar />}
                     iconBgClass="bg-blue-900/30"
@@ -134,6 +136,28 @@ export default function DashboardPage() {
                   
                   <div>
                     <ClaimSummary entitlements={dashboardData?.entitlements || []} />
+                  </div>
+                </div>
+                
+                {/* Advanced Analytics Section */}
+                <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  <div className="lg:col-span-2">
+                    <TrendAnalysisChart 
+                      title="Claims Analysis" 
+                      subtitle="Trend of submitted vs. approved claims (₹)" 
+                      data={dashboardData?.claimTrendData || []}
+                      trendPercentage={-2.4}
+                      targetValue={dashboardData?.claimTarget}
+                    />
+                  </div>
+                  
+                  <div>
+                    <HealthMetricsCard
+                      title="Health Assessment"
+                      subtitle="Your health metrics overview"
+                      data={dashboardData?.healthMetricsData || []}
+                      overallScore={dashboardData?.overallHealthScore}
+                    />
                   </div>
                 </div>
                 

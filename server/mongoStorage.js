@@ -430,6 +430,29 @@ export class MongoStorage {
       { month: "Jun", domiciliary: 0, chronic: 0, hospitalization: 1800 }
     ];
     
+    // Trend analysis data for claims over time (last 6 months)
+    const claimTrendData = [
+      { period: "Jan", claims: 5700, approvals: 5200 },
+      { period: "Feb", claims: 4400, approvals: 4100 },
+      { period: "Mar", claims: 8500, approvals: 7500 },
+      { period: "Apr", claims: 3800, approvals: 3500 },
+      { period: "May", claims: 5400, approvals: 4800 },
+      { period: "Jun", claims: 1800, approvals: 1200 }
+    ];
+    
+    // Health metrics data (for radar chart)
+    const healthMetricsData = [
+      { category: "Regular Check-ups", value: 8, description: "Frequency of preventive health consultations" },
+      { category: "Medication Adherence", value: 9, description: "Consistency in taking prescribed medications" },
+      { category: "Chronic Management", value: 7, description: "How well chronic conditions are controlled" },
+      { category: "Preventive Care", value: 6, description: "Participation in preventive health measures" },
+      { category: "Wellness Activities", value: 5, description: "Engagement in fitness and wellness programs" },
+      { category: "Mental Health", value: 8, description: "Status of emotional and mental wellbeing" }
+    ];
+    
+    // Calculate health trend percentage (change from last quarter)
+    const healthTrendPercentage = 5.2; // Positive trend in health metrics
+    
     // Recent activity/transactions
     const recentActivity = [
       {
@@ -506,7 +529,13 @@ export class MongoStorage {
       entitlements: allEntitlements,
       nextAppointment,
       monthlyClaimsData,
-      recentActivity
+      claimTrendData,
+      healthMetricsData,
+      healthTrendPercentage,
+      recentActivity,
+      // Target values for benchmarks
+      claimTarget: 6000, // Monthly target/budget for claims
+      overallHealthScore: 7.2 // Overall health score out of 10
     };
   }
 }
